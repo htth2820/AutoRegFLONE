@@ -1,0 +1,608 @@
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script language="javascript" type="text/javascript">
+    
+    var gv = 'False';
+</script>
+<script type="text/javascript" src="https://apis.google.com/js/platform.js?hl=vn" async defer></script>
+<head><meta name="google-signin-scope" content="profile email" /><meta id="ctl00_metaGoogle" name="google-signin-client_id" /><link id="ctl00_favicon" rel="shortcut icon" type="image/x-icon" href="./MessageFile/FTU's_logo.jpg" />
+    <script src="JS/jquery-2.2.1.js" type="text/javascript"></script>
+    <script src="JS/dialog.js" type="text/javascript"></script>
+    <script src="JS/checkdate.js" type="text/javascript"></script>
+    <script src="JS/balloontip.js" type="text/javascript"></script>
+    <link href="JS/balloontip.css" rel="stylesheet" type="text/css" /><title>
+	Cổng Thông Tin Đào Tạo-Đại học chính quy-DHNTDHCQ
+</title>
+    <script type="text/javascript" language="javascript">
+
+        function ShowMess() {
+            var url = location.href;
+            if (url.indexOf("err=serveroverload", 0) > 0)
+                alert('Server quá tải, vui lòng đăng nhập lại!');
+            else if (url.indexOf("err=sessionreuse", 0) > 0)
+                alert('Vui lòng tắt và mở lại trình duyệt!');
+        }
+
+        $(function () {
+            if (typeof AjaxPro != 'undefined' && AjaxPro && AjaxPro.Request && AjaxPro.Request.prototype) {
+                AjaxPro.Request.prototype.doStateChange = function () {
+                    this.onStateChanged(this.xmlHttp.readyState, this);
+                    if (this.xmlHttp.readyState != 4 || !this.isRunning) {
+                        return;
+                    }
+                    this.duration = new Date().getTime() - this.__start;
+                    if (this.timeoutTimer != null) {
+                        clearTimeout(this.timeoutTimer);
+                    }
+                    var res = this.getEmptyRes();
+                    if (this.xmlHttp.status == 200 && (this.xmlHttp.statusText == "OK" || !this.xmlHttp.statusText)) {
+                        res = this.createResponse(res);
+                    } else {
+                        res = this.createResponse(res, true);
+                        res.error = { Message: this.xmlHttp.statusText, Type: "ConnectFailure", Status: this.xmlHttp.status };
+                    }
+                    this.endRequest(res);
+                };
+            }
+            //gapi.load('auth2', function () {
+            //    gapi.auth2.GoogleUser(u => {
+            //        u.getAuthResponse(a => {
+            //            EduSoft.Web.DefaultMaster.CheckGoogle(a.id_token, x => {
+            //                if (x.value) {
+            //                    self.location = decodeURIComponent(x.value);
+            //                }
+            //            });
+            //        });
+            //    });
+            //}
+        });
+    </script>
+
+<link href="App_Themes/Standard/Standard.css" type="text/css" rel="stylesheet" /><link href="App_Themes/Standard/StyleSheet.css" type="text/css" rel="stylesheet" /></head>
+
+<body background="App_Themes/Standard/Images/background.png" onload="ShowMess()">
+    <form name="aspnetForm" method="post" action="default.aspx" id="aspnetForm" enctype="multipart/form-data">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+
+<script type="text/javascript" src="/ajaxpro/prototype.ashx"></script>
+<script type="text/javascript" src="/ajaxpro/core.ashx"></script>
+<script type="text/javascript" src="/ajaxpro/converter.ashx"></script>
+<script type="text/javascript" src="/ajaxpro/EduSoft.Web.DefaultMaster,EduSoft.Web.ashx"></script>
+<script type="text/javascript" src="/ajaxpro/EduSoft.Web.UC.Logout,EduSoft.Web.ashx"></script>
+<script type="text/javascript" src="/ajaxpro/EduSoft.Web.UC.Footer,EduSoft.Web.ashx"></script>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0B0334" />
+</div>
+        <div align="center">
+            <div class="base">
+                
+                <table>
+                    <tr>
+                        <td>
+                            
+
+<div style="background-image: url(Images/bg_heading_thongbao.png)">
+    <table width="1000px">
+        <tr>
+            <td height="20px" style="padding-left: 50px" valign="bottom" align="right">
+                
+
+
+
+<script language="javascript" type="text/javascript">
+
+    function changeLanguage_click(obj) {
+        EduSoft.Web.UC.Logout.ChangeLanguage(obj, changeLanguage_callback);
+    }
+    function changeLanguage_callback() {
+        var loc = window.location.href;
+        if (loc.endsWith("/")) loc = loc.substr(0, loc.length - 1);
+        if (loc.toLowerCase().indexOf("default.aspx") <= 0)
+            self.location = loc + "/default.aspx?pgtemp=x";
+        else if (loc.toLowerCase().indexOf("?") <= 0)
+            self.location = loc + "?lang=x";
+        else if (loc.endsWith("&lang=x"))
+            self.location = loc.replace("&lang=x", "&lang=y");
+        else if (loc.endsWith("&lang=y"))
+            self.location = loc.replace("&lang=y", "&lang=x");
+        else
+            self.location = loc + "&lang=x";
+    }
+    function selectFont_change() {
+        var selectmenu = document.getElementById("selectFont");
+        var chosenOption = selectmenu.options[selectmenu.selectedIndex];
+        var font = chosenOption.value;
+        EduSoft.Web.UC.Logout.ChangeFont(font, ChangeFont_callback);
+    }
+    function ChangeFont_callback() {
+        //self.location=window.location;
+    }
+
+    function ConfirmChuaLuu(obj) {
+
+        alert(obj);
+        self.location = "default.aspx?page=dkmonhoc";
+    }
+
+    
+
+    function signOutGoogle(dest) {
+        var url = 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue='
+            + decodeURIComponent(dest) + 'page=gioithieu';
+        document.location.href = url;
+        
+        //gapi.load('auth2', function () {
+        //    gapi.auth2.init();
+        //    var auth = gapi.auth2.GoogleAuth;
+        //    auth.signOut().then(function () {
+        //        location = decodeURIComponent(dest) + 'page=gioithieu';
+        //    });
+        //});
+    }
+</script>
+
+<div id="ctl00_Header1_Logout1_dLog" class="logout" style="text-align: right; margin-bottom: 0px">
+    
+    <img src="App_Themes/Standard/Images/US.gif" alt="English" onclick="changeLanguage_click('_us')"
+        id="imgUS" title="English" />
+    <img src="App_Themes/Standard/Images/VI.gif" alt="Vietnamese" onclick="changeLanguage_click('_vi')"
+        id="imgVi" title="Vietnamese" />
+    <span id="ctl00_Header1_Logout1_lblNguoiDung" class="Label" style="color:#FF3300;font-size:12px;font-weight:bold;">Chào bạn </span>&nbsp;
+    
+    
+    <a id="ctl00_Header1_Logout1_lbtnLogOut" href="javascript:__doPostBack('ctl00$Header1$Logout1$lbtnLogOut','')" style="color:#FF3300;font-size:10pt;font-weight:bold;font-family: 'Tahoma', Times, serif">Đăng Nhập</a>
+    &nbsp;<select id="selectFont" style="font-size: 11px; width: 100px; color: #000080;"
+        onchange="selectFont_change()">
+        <option value="uni">-------Font-------</option>
+        <option value="uni" selected>Font Unicode</option>
+        <option value="abc" >Font ABC</option>
+        <option value="vni" >Font Vni</option>
+        <option value="not" >Text không
+            dấu</option>
+    </select>
+</div>
+
+            </td>
+        </tr>
+    </table>
+</div>
+
+                            
+
+<style type="text/css">
+    .styleApplication {
+        font-size: 26;
+        font-weight: bold;
+    }
+
+    @font-face {
+        font-family: 'myriadpro';
+        src: url('js/myriadpro-bold.otf');
+    }
+
+    .menufontdhxd {
+        font-family: 'myriadpro';
+        font-size: 14px;
+    }
+</style>
+
+<div class="left-menu">
+    <div class="right-menu">
+
+        <div class="main-menu" style="height: 110px">
+
+            <div id="ctl00_menu_pnlGioithieu" class="out-menu">
+	
+                <div class="left"></div>
+                <div class="center" style="white-space: nowrap">
+                    <a href="Default.aspx?page=gioithieu">
+                        <span id="ctl00_menu_lblTrangChu" class="Label">TRANG CHỦ</span></a>
+                </div>
+                <div class="right"></div>
+            
+</div>
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            <div id="ctl00_menu_xemlichthi" class="out-menu">
+	
+                <div class="left"></div>
+                <div class="center" style="white-space: nowrap">
+                    <a href="Default.aspx?page=nhapmasv&flag=XemLichThi">
+                        <span id="ctl00_menu_lblXemLichThi" class="Label">XEM LỊCH THI</span></a>
+                </div>
+                <div class="right"></div>
+            
+</div>
+
+            
+            
+
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+
+
+            
+
+
+
+            
+
+
+
+
+            
+
+            
+
+            
+
+
+
+            
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+
+
+            
+
+            
+
+            
+
+            
+
+
+            
+
+            
+            
+            
+            
+
+            
+
+            
+
+            
+            
+            <div id="ctl00_menu_pnlGTTruong" class="out-menu">
+	
+                <div class="left"></div>
+                <div class="center" style="white-space: nowrap">
+                    <a href='Default.aspx?page=gttruong'>
+                        <span id="ctl00_menu_lblGioithieutruong" class="Label">GIỚI THIỆU TRƯỜNG</span></a>
+                </div>
+                <div class="right"></div>
+            
+</div>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+
+            
+
+            
+
+
+            
+
+            
+
+            
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+
+            
+            
+
+            
+            
+            
+            
+        </div>
+
+    </div>
+
+</div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="500px" valign="top">
+                            
+
+
+<style type="text/css">
+    .style1 {
+        height: 27px;
+    }
+
+    .protected {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+</style>
+
+<script language="javascript" type="text/javascript">
+    function MessUpdate(obj) {
+        alert(obj);
+    }
+</script>
+
+<div class="navigate-base">
+    <div class="title-base">
+        <div class="title">
+            <table>
+                <tr>
+                    <td width="10px">
+                        <img src="App_Themes/Standard/Images/icon_04b.gif" />
+                    </td>
+                    <td>
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblquenmk" class="Label">XÁC THỰC ĐĂNG NHẬP WEBSITE ĐĂNG KÝ MÔN HỌC</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlmk" style="height:368px;width:100%;text-align: center">
+	
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <table cellpadding="0" cellspacing="1" align="center">
+            <tr hight="30px">
+                <td align="right" valign="middle">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_Label1" class="Label" style="font-weight:bold;">Xác nhận ký tự:    </span>
+
+                </td>
+                <td align="left" valign="middle" width="180px">
+                    <input name="ctl00$ContentPlaceHolder1$ctl00$txtCaptcha" type="text" id="ctl00_ContentPlaceHolder1_ctl00_txtCaptcha" class="TextBox" style="height:30px;width:175px;" />
+
+                </td>
+
+                <td align="left" valign="middle">
+                    <span class="protected">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblCapcha" class="Label" style="color:#0066FF;font-family:Comic Sans MS;font-size:20pt;font-weight:bold;font-style:italic;">R90B8</span></span>
+                    
+                    <input type="image" name="ctl00$ContentPlaceHolder1$ctl00$imbReLoad" id="ctl00_ContentPlaceHolder1_ctl00_imbReLoad" src="Images/refresh.jpg" style="width:30px;border-width:0px;" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td align="left">
+                    <input type="submit" name="ctl00$ContentPlaceHolder1$ctl00$btnXacNhan" value="Vào website" id="ctl00_ContentPlaceHolder1_ctl00_btnXacNhan" class="DefaultButton" style="width:93px;font-weight: 700" />
+                </td>
+            </tr>
+        </table>
+    
+</div>
+</div>
+
+
+    
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
+
+<style type="text/css">
+   
+    .style3
+    {
+        width: 70px;
+    }
+    .style4
+    {
+        width: 129px;
+    }
+    .style5
+    {
+        width: 1019px;
+    }
+   
+</style>
+
+<div class="footer">
+<table width="100%"><tr><td align="left" class="style5" >
+<img src="App_Themes/Standard/Images/icon_11c.gif" alt="" />
+<span class="LogoFooter"><span id="ctl00_Footer1_lblCompany" class="Label">Copyright ©2009 Đại học chính quy. Quản lý bởi </span></span>
+</td>
+    
+        <td valign="top"  align="left" class="style4">
+        <img src="App_Themes/Standard/Images/iconHome.png" alt="" align="right"  />    
+        </td>
+        <td align="left" class="style3">
+        <a href="Default.aspx"><span id="ctl00_Footer1_lbltrangchu" class="Label">Trang Chủ</span></a>
+        </td>
+        
+        
+</tr>
+<tr>
+<td class="style5" >
+    <img src="App_Themes/Standard/Images/icon_11c.gif" alt="" /> 
+    <a href="https://aqtech.vn/" target="_blank"><span id="ctl00_Footer1_lblCopyRight" class="Label">Thiết kế bởi cty Phần mềm Anh Quân</span></a>
+    
+    
+     
+</td>
+<td align="right" valign="top" class="style4"> 
+    <img src="App_Themes/Standard/Images/topTen.gif" width="15px" alt="" />
+    </td>
+    <td class="style3">
+    <a href="#Top" title="Go to top" style="text-decoration: none; font-family:Tahoma;font-size:8pt">
+    <span id="ctl00_Footer1_lbltop" class="Label">Đầu Trang</span>
+    </a>
+</td>
+<td align="right"><a href="Default.aspx?page=thongtinsp"><span id="ctl00_Footer1_lblAbout" class="Label">About</span></a></td>
+</tr>
+
+</table></div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        
+    </form>
+    
+</body>
+
+</html>
