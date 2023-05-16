@@ -1,5 +1,6 @@
 # AutoRegFLONE
 Tool hỗ trợ đăng ký tín chỉ Đại học Ngoại thương tại website: http://ftugate.ftu.edu.vn/
+Demo version 2019: https://www.youtube.com/watch?v=tfaVHzLzKiM
 Gồm các chức năng chính như:
 + Vượt Captcha
 + Tự động kiểm tra và báo hiệu khi mở đăng ký
